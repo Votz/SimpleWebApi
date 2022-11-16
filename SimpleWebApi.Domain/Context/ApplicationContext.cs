@@ -16,17 +16,11 @@ namespace SimpleWebApi.Domain.Context
 
         }
 
-        //Students
-
         public virtual DbSet<Student> Students { get; set; }
-
-        //Grade
 
         public virtual DbSet<Grade> Grades { get; set; }
 
         public virtual DbSet<Subject> Subjects { get; set; }
-
-        //Relations Between grade and student
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -39,8 +33,6 @@ namespace SimpleWebApi.Domain.Context
             builder.Entity<Student>()
                 .HasOne(x => x.Grade)
                 .WithMany(x => x.Students);
-            //Primary Key
-            // Foreign key
         }
 
         public override int SaveChanges()
@@ -69,22 +61,5 @@ namespace SimpleWebApi.Domain.Context
             int result = base.SaveChanges();
             return result;
         }
-
-        #region Commit for error handling in SaveChanges Methods
-        //Sneak Peek
-        //public void Commit()
-        //{
-        //    try
-        //    {
-        //        this.SaveChanges();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        System.Diagnostics.Debug.WriteLine(ex);
-        //        throw ex;
-        //    }
-        //} 
-        #endregion
-
     }
 }

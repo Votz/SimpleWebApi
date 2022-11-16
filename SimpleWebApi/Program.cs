@@ -29,18 +29,9 @@ builder.Services.AddTransient<IWeatherService, WeatherService>();
 
 builder.Services.AddValidatorsFromAssemblyContaining<StudentRequestValidator>();
 
-//IOC - Input Output Container
-//builder.Services.AddScoped<IGradeService, GradeService>();
-//builder.Services.AddSingleton<IGradeService, GradeService>();
-
-//Add AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
-//var apiRoute = builder.Configuration["MovieApiRoute"];
-
 builder.Services.AddHttpClient();
-
-
 
 var app = builder.Build();
 
@@ -64,11 +55,3 @@ app.UseEndpoints(endpoints =>
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
 });
-
-//API - Application Programming interface
-
-
-//MVC - Model View Controller
-
-
-

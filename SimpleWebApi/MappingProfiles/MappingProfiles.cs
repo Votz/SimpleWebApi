@@ -11,7 +11,6 @@ namespace SimpleWebApi.MappingProfiles
         public MappingProfiles()
         {
             CreateMap<GradeRequest, Grade>();
-                //.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.y));
 
             CreateMap<Grade, GradeResponse>();
 

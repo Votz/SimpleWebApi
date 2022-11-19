@@ -13,6 +13,7 @@ namespace SimpleWebApi.MappingProfiles
             CreateMap<GradeRequest, Grade>();
 
             CreateMap<Grade, GradeResponse>();
+            //CreateMap<List<Grade>, List<GradeResponse>>();
 
             CreateMap<StudentRequest, Student>();
             CreateMap<Student, StudentResponse>();

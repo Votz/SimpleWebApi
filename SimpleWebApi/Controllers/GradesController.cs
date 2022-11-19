@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using SimpleWebApi.Filters;
 using SimpleWebApi.Services.Interfaces;
 using SimpleWebApi.Shared.Models;
 using SimpleWebApi.Shared.Models.Request;
@@ -6,6 +8,8 @@ using SimpleWebApi.Shared.Models.Response;
 
 namespace SimpleWebApi.Controllers
 {
+    //[Authorize(AuthenticationSchemes = "Identity.Application")]
+    [CustomAuthorize("Admin")]
     [ApiController]
     [Route("api/[controller]")]
     public class GradesController : ControllerBase
@@ -17,18 +21,21 @@ namespace SimpleWebApi.Controllers
             _gradeService = gradeService;
         }
 
+        
         [HttpPost("[action]")]
         public ApiResponse<GradeResponse> CreateGrade([FromBody] GradeRequest model)
         {
             return _gradeService.Create(model);
         }
 
+        
         [HttpGet("[action]")]
-        public ApiResponse<IEnumerable<GradeResponse>> GetAllGrades()
+        public ApiResponse<List<GradeResponse>> GetAllGrades()
         {
             return _gradeService.GetAll();
         }
 
+        //[AllowAnonymous]
         [HttpGet("[action]")]
         public ApiResponse<bool> DeleteGrade(int id)
         {

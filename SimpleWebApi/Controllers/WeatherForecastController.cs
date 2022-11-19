@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SimpleWebApi.Services.Interfaces;
 
 namespace SimpleWebApi.Controllers
 {
     //SRP - Single Responsibility Principle
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -22,27 +24,27 @@ namespace SimpleWebApi.Controllers
             _weatherService = weatherService;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            //Connect to DB - Domain
-            //Get Data from DB - Services
-            //Process DB Info - Services
-            //Return info to user - Api
+        //[HttpGet(Name = "GetWeatherForecast")]
+        //public IEnumerable<WeatherForecast> Get()
+        //{
+        //    //Connect to DB - Domain
+        //    //Get Data from DB - Services
+        //    //Process DB Info - Services
+        //    //Return info to user - Api
 
-            _weatherService.GetThirtyDayWeather(13,13);
+        //    _weatherService.GetThirtyDayWeather(13,13);
 
-            var guid = new Guid();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Id = index++,
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+        //    var guid = new Guid();
+        //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        //    {
+        //        Id = index++,
+        //        Date = DateTime.Now.AddDays(index),
+        //        TemperatureC = Random.Shared.Next(-20, 55),
+        //        Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+        //    })
+        //    .ToArray();
 
-        }
+        //}
     }
 }
 

@@ -69,9 +69,16 @@ namespace SimpleWebApi.Services.Services
             throw new NotImplementedException();
         }
 
-        public ApiResponse<IEnumerable<GradeResponse>> GetAll()
+        public ApiResponse<List<GradeResponse>> GetAll()
         {
-            throw new NotImplementedException();
+            var grades = _context.Grades.Select(x => new GradeResponse
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Score = x.Score
+            }).ToList();
+            return ApiResponse<List<GradeResponse>>.Success(grades);
+            //return ApiResponse<List<GradeResponse>>.Success(_mapper.Map<List<GradeResponse>>(grades));
         }
 
         public ApiResponse<GradeResponse> Update(int id, GradeRequest model)

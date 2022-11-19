@@ -6,7 +6,7 @@ namespace SimpleWebApi.Services.Interfaces
 {
     public interface IGradeService
     {
-        ApiResponse<IEnumerable<GradeResponse>> GetAll();
+        ApiResponse<List<GradeResponse>> GetAll();
 
         ApiResponse<GradeResponse> GetById(int id);
 

@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using SimpleWebApi.Domain.Entities;
 using SimpleWebApi.Services.Interfaces;
 using SimpleWebApi.Shared.Models.Request;
 using SimpleWebApi.Shared.Models.Response;
@@ -36,7 +35,6 @@ namespace SimpleWebApi.Controllers
             else
             {
                 return _studentService.Create(model);
-                //Process Errors and return messages to users
             }
         }
 

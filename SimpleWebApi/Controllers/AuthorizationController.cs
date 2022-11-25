@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SimpleWebApi.Domain.Entities;
+using SimpleWebApi.Services.Interfaces;
 using SimpleWebApi.Shared.Models.Request;
 using System.Security.Claims;
 
@@ -10,47 +11,21 @@ namespace SimpleWebApi.Controllers
     [Route("api/[controller]")]
     public class AuthorizationController : ControllerBase
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
-
-        public AuthorizationController(
-            SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager)
+        private readonly IAuthorizationService _authorization;   
+        public AuthorizationController(IAuthorizationService authorization)
         {
-            _signInManager = signInManager;
-            _userManager = userManager;
+            _authorization = authorization;
         }
 
         [HttpPost("[action]")]
         public async Task<IActionResult> Login(LoginRequest model)
         {
-            if(model is null)
-                return BadRequest();
+            return !await _authorization.ValidateUserAsync(model)
+                ? Unauthorized()
+                : Ok(new { Token = await _authorization.CreateTokenAsync(model.Username)});
 
-            var user = await _userManager.FindByNameAsync(model.Username);
-            if (user is null)
-                return BadRequest();
-
-            var claims = new List<Claim>
-            {
-                new Claim("Role","Admin")
-            };
-
-            var userIdentity = new ClaimsIdentity(claims);
-
-            var addClaimResult = await _userManager.AddClaimsAsync(user, claims);
-
-            var checkPasswordResult = await _signInManager.CheckPasswordSignInAsync(user, model.Password, true);
-
-            var principal = await _signInManager.CreateUserPrincipalAsync(user);
-            //var principal = await _signInManager.(user);
-
-            //var signInResult = SignIn(principal, "MyApp");
-            //if (signInResult is null)
-            //    return BadRequest();
-
-            return SignIn(principal, "Identity.Application");
         }
+
 
     }
 }

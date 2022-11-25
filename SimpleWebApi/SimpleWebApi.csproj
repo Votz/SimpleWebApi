@@ -23,4 +23,8 @@
     <ProjectReference Include="..\SimpleWebApi.Services\SimpleWebApi.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Filters\" />
+  </ItemGroup>
+
 </Project>

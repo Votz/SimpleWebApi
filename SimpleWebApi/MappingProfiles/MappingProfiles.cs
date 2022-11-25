@@ -19,6 +19,8 @@ namespace SimpleWebApi.MappingProfiles
             CreateMap<Student, StudentResponse>();
 
             CreateMap<GradeRequest, GradeResponse>();
+
+            CreateMap<RegisterRequest, ApplicationUser>();
         }
 
     }

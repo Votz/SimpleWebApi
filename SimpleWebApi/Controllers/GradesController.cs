@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using SimpleWebApi.Filters;
+﻿using Microsoft.AspNetCore.Mvc;
 using SimpleWebApi.Services.Interfaces;
 using SimpleWebApi.Shared.Models;
 using SimpleWebApi.Shared.Models.Request;
@@ -9,7 +7,7 @@ using SimpleWebApi.Shared.Models.Response;
 namespace SimpleWebApi.Controllers
 {
     //[Authorize(AuthenticationSchemes = "Identity.Application")]
-    [CustomAuthorize("Admin")]
+    
     [ApiController]
     [Route("api/[controller]")]
     public class GradesController : ControllerBase
